@@ -56,24 +56,24 @@ I would be interested to know if the library works in older versions of Maya and
 
 Download or clone the repository
 
-```git clone https://github.com/davidpaulrosser/Forms.git```
+``git clone https://github.com/davidpaulrosser/Forms.git``
 
 
 Theres two ways to add Forms to Maya's Python script path. The recommended way is to append the library path to Python's system path in your userSetup.py. This enables you to keep the library anywhere on your computer.
 
-```/Users/<user>/Library/Preferences/Autodesk/maya/<version>/scripts/userSetup.py```
-
 **userSetup.py**
+
+``/Users/<user>/Library/Preferences/Autodesk/maya/<version>/scripts/userSetup.py``
 
 ```
 import sys
 
-sys.path.append( 'path/to/forms' )    
+sys.path.append( 'path/to/forms' ) 
 ```
 
 Or you can place the library directly in your scripts directory:
 
-```/Users/<user>/Library/Preferences/Autodesk/maya/<version>/scripts```
+``/Users/<user>/Library/Preferences/Autodesk/maya/<version>/scripts``
 
 And that's it. The next time you launch Maya you should be able to access the Forms package and its modules.
 
