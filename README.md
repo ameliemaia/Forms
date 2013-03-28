@@ -68,14 +68,12 @@ Theres two ways to add Forms to Maya's Python script path. The recommended way i
 ```
 import sys
 
-sys.path.append( 'path/to/forms' )
-    
+sys.path.append( 'path/to/forms' )    
 ```
-
 
 Or you can place the library directly in your scripts directory:
 
- ```/Users/<user>/Library/Preferences/Autodesk/maya/<version>/scripts```
+```/Users/<user>/Library/Preferences/Autodesk/maya/<version>/scripts```
 
 And that's it. The next time you launch Maya you should be able to access the Forms package and its modules.
 
@@ -91,8 +89,4 @@ For feature requests and bugs file an issue.
 
 ## License
 
-<<<<<<< HEAD
 [MIT Licensed](https://github.com/davidpaulrosser/Forms/blob/master/README.md "MIT Licensed")
-=======
-[MIT Licensed](https://github.com/davidpaulrosser/forms/Readme.md "MIT Licensed")
->>>>>>> 204156da7d5ac49ccb0df280fbebcd93169846a5
