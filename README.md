@@ -1,6 +1,6 @@
 # Forms
 
-Forms is a Python package for Maya that includes a collection of modules that explore generative 3D geometry and curves.
+Forms is a Python package for Maya that provides helpful scripts for creating generative 3D geometry and curves. It also includes utilities for modifying meshes.
 
 
 ## About
@@ -15,7 +15,7 @@ These experiments are the foundation of this library, and it will grow further a
 
 ## Example
 
-To generate a Menger Sponge simply type the following in Maya's script editor and hit Execute.
+To generate a Menger Sponge simply copy and paste the following in Maya's script editor and hit Execute.
 
 ```
 from forms.geometry import *
@@ -27,9 +27,7 @@ print( x )
 # Result: [nt.Transform(u'MengerSponge_Iteration_3')]
 ```
 
-For a more comprehensive tutorial on using Forms checkout the [Getting started guide](/ "Getting started guide").
-
-For the full list of Forms modules visit the [Module API docs](/ "Module API docs"), otherwise check the [source code](/ "source code"). 
+For more information on Form's packages and modules browse the [source code](https://github.com/davidpaulrosser/Forms "source code").
 
 
 ## Requirements
@@ -75,7 +73,7 @@ Or you can place the library directly in your scripts directory:
 
 ``/Users/<user>/Library/Preferences/Autodesk/maya/<version>/scripts``
 
-And that's it. The next time you launch Maya you should be able to access the Forms package and its modules.
+And that's it. The next time you launch Maya you should be able to access the Forms package.
 
 ```
 import forms
