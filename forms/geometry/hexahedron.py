@@ -2,7 +2,7 @@
 This module provides a set of classes for generating Hexahedron meshes.
 
 Hexahedron    -- Generate a Hexahedron mesh
-Menger Sponge -- Generate a Menger Sponge fractal mesh
+Sierpinski    -- Generate a Sierpinski hexahedron fractal mesh
 """
 
 
@@ -33,7 +33,7 @@ class Hexahedron:
 
 
 
-class MengerSponge( Hexahedron ):
+class Sierpinski( Hexahedron ):
     
     
     """
@@ -53,7 +53,7 @@ class MengerSponge( Hexahedron ):
 
         instanceGroup   = pm.group( empty = True, name = "meshInstanceGroup" )
         
-        instances = [ None ] * 20
+        instances = [ None ] * util.pow( self.grid, 3 )
         
         # Instance a sponge, position it, then add it to the group
         
@@ -80,13 +80,11 @@ class MengerSponge( Hexahedron ):
         i = 0   
         j = 0   
         
-        for levels in range( 3 ):
+        for levels in range( self.grid ):
 
-            for rows in range( 3 ):
+            for rows in range( self.grid ):
 
-                for columns in range( 3 ):
-
-                    i += 1
+                for columns in range( self.grid ):
 
                     if i not in self.holes:
 
@@ -94,42 +92,46 @@ class MengerSponge( Hexahedron ):
 
                         j += 1
 
+                    i += 1
+
         
         pm.parent( instances, instanceGroup, add = True )
         
-        return combineClean( instanceGroup, "MengerSponge_Iteration_%i" % iteration, True )
+        return combineClean( instanceGroup, "Sierpinski_Iteration_%i" % iteration, True )
     
 
 
     """ 
-    Generate a Menger Sponge fractal mesh. 
+    Generate a Sierpinski hexahedron fractal mesh. 
 
     Parameters:
         size       -- the size of the final mesh ( default 10cm )
         iterations -- the amount of iterations ( default 1 )
-        holes      -- a list of holes ( default [ 5, 11, 13, 14, 15, 17, 23 ] )
+        grid       -- the grid subdivision amount ( default 3 )
+        holes      -- a list of holes ( default [ 4, 10, 12, 13, 14, 16, 22 ] )
     
     Return:
         mesh -- ( pymel.core.nodetypes.Transform(u'') )
 
     """
 
-    def generate( self, size = 10, iterations = 1, holes = [ 5, 11, 13, 14, 15, 17, 23 ] ):
+    def generate( self, size = 10, iterations = 1, grid = 3, holes = [ 4, 10, 12, 13, 14, 16, 22 ] ):
 
         self.size       = size
         self.iterations = iterations
+        self.grid       = grid
         self.holes      = holes
 
         print( "%s radius %f iterations %i" % ( self.__class__.__name__, self.size, self.iterations ) )
     
-        cubeSize = float(self.size) /  util.pow( float(3), float(self.iterations) )
+        cubeSize = float(self.size) /  util.pow( float(self.grid), float(self.iterations) )
         cube     = self.mesh( width = cubeSize, height = cubeSize, depth = cubeSize )    
         cubes    = [ cube ]
         
         for i in range( iterations ):
 
             mesh     = self.__generateMesh( cubes[ 0 ], cubeSize, ( i + 1 ) )
-            cubeSize = cubeSize * 3
+            cubeSize = cubeSize * self.grid
             cubes    = [ mesh ]
 
 

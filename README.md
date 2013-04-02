@@ -20,11 +20,11 @@ To generate a Menger Sponge simply copy and paste the following in Maya's script
 ```
 from forms.geometry import *
 
-x = hexahedron.MengerSponge().generate( size = 30, iterations = 3 )
+x = hexahedron.Sierpinski().generate( size = 30, iterations = 3, grid = 3 )
 
 print( x )
 
-# Result: [nt.Transform(u'MengerSponge_Iteration_3')]
+# Result: [nt.Transform(u'Sierpinski_Iteration_3')]
 ```
 
 For more information on Form's packages and modules browse the [source code](https://github.com/davidpaulrosser/Forms "source code").
