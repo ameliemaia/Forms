@@ -88,3 +88,7 @@ For feature requests and bugs file an issue.
 ## License
 
 [MIT Licensed](https://github.com/davidpaulrosser/Forms/blob/master/README.md "MIT Licensed")
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/davidpaulrosser/forms/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
