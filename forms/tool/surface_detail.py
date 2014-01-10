@@ -18,7 +18,7 @@ class SurfaceDetail:
 		self.sliderValues     = [ None ] * self.iterations
 		self.meshTypes 		  = { 'Soccer Ball': 0, 'Dodecahedron': 0, 'Icosahedron': 1, 'Octahedron': 2, 'Tetrahedron': 3 } 
 		self.meshType         = 'Soccer Ball'
-		self.operations       = [ 'poke', 'triangle', 'quad' ]
+		self.operations       = [ 'poke', 'quad' ]
 		self.operation        = 'poke'
 		self.mesh         	  = None
 		self.indicies     	  = [ ]
@@ -57,14 +57,10 @@ class SurfaceDetail:
 		verticesStartIndex = 0
 		verticesEndIndex   = 1
 
-		for i in range( self.iterations ):
+		for i in range( self.iterations + 1 ):
 
-			if i is 0:
-				verticesStartIndex = 0
-				verticesEndIndex   = self.vertexIndicies[ 0 ]
-			else:
-				verticesStartIndex = self.vertexIndicies[ i - 1 ]
-				verticesEndIndex   = self.vertexIndicies[ i ]
+			verticesStartIndex = self.vertexIndicies[ i - 1 ]
+			verticesEndIndex   = self.vertexIndicies[ i ]
 
 			for j in range( verticesStartIndex, verticesEndIndex ):
 				position = self.vertexPositions[ j ] * scaleValues[ i ]
@@ -81,6 +77,9 @@ class SurfaceDetail:
 			_vertices = self.mesh[ 0 ].vtx
 			length   = len( _vertices )
 
+			if i is 0:
+				vertices.append( length )
+
 			if self.operation == 'quad': divisionMode = 0
 			if self.operation == 'triangle': divisionMode = 1
 			
@@ -88,6 +87,10 @@ class SurfaceDetail:
 				pm.polyPoke( _faces, translateX = 0, translateY = 0, translateZ = 0, worldSpace = True )
 			else:
 				pm.polySubdivideFacet( _faces, mode = divisionMode, divisions = 1 )
+
+			_faces    = self.mesh[ 0 ].f
+			_vertices = self.mesh[ 0 ].vtx
+			length   = len( _vertices )
 
 			vertices.append( length )
 
@@ -99,20 +102,20 @@ class SurfaceDetail:
 
 # Generate some random solids
 
-tool = SurfaceDetail()
+#tool = SurfaceDetail()
 
 # for key in tool.meshTypes:
 
 def surfaceDetailSolidGenerator():
 
-	rows = 1
-	cols = 1
+	rows = 10
+	cols = 10
 
 	radius      = 10
-	iterations  = 4
+	iterations  = 3
 	scaleValues = []
-	minScale    = 0.1
-	maxScale    = 0.15
+	minScale    = 0.01
+	maxScale    = 0.5
 
 	for col in range(cols):
 		for row in range(rows):
@@ -125,16 +128,19 @@ def surfaceDetailSolidGenerator():
 				if i is 0:
 					newScale = 1
 				else:
-					newScale = scaleValues[i-1] + random.uniform(minScale, maxScale) 
+					newScale = scaleValues[i-1] - random.uniform(minScale, maxScale) 
 
 				scaleValues.append( newScale )
 
 			meshType  = random.choice(tool.meshTypes.keys())
+			# meshType  = 'Icosahedron'
 			operation = random.choice(tool.operations)
 
-			mesh = tool.generate(meshType, radius, iterations, 'poke')
+			mesh = tool.generate(meshType, radius, iterations, operation)
 			tool.setScale(scaleValues)
 			mesh[0].setTranslation([x, 0, z])
 
+			print 'FORM :: type: ', meshType, ' operation: ', operation 
 
-surfaceDetailSolidGenerator()
+
+#surfaceDetailSolidGenerator()
