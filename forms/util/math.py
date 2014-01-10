@@ -23,20 +23,20 @@ sqrt    = util.arrays.sqrt
 
 """
 Scale vector arguments:
-    
+	
 Parameters:
-    vector -- the vector ( dt.Vector || dt.FloatVector )
-    scale  -- a ratio to scale the vectors magnitude
+	vector -- the vector ( dt.Vector || dt.FloatVector )
+	scale  -- a ratio to scale the vectors magnitude
 
 
 Return:
-    scaledVector -- ( dt.Vector || dt.FloatVector )
+	scaledVector -- ( dt.Vector || dt.FloatVector )
 
 """
 
 def scaleVector( vector, scale ):
 
-    scaledVector  = vector
-    scaledVector *= ( float(1) - float(scale) / float(vector.length()) )
-    
-    return scaledVector
+	scaledVector  = vector
+	scaledVector *= ( float(1) - float(scale) / float(vector.length()) )
+	
+	return scaledVector
